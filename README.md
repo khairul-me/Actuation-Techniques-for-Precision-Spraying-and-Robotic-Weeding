@@ -9,7 +9,8 @@
 ## 🌟 Project Overview
 
 This repository contains the complete implementation of a **full-stack autonomous tractor system** designed for precision agriculture applications. Our system integrates advanced computer vision, artificial intelligence, and robotic control to enable intelligent, targeted weed management with unprecedented accuracy and efficiency.
-<img width="2048" height="1536" alt="image" src="https://github.com/user-attachments/assets/9e620a5a-ef87-45a3-b3ce-7017ac0cdac3" />
+<img width="2048" height="1536" alt="image" src="https://github.com/user-attachments/assets/3d57a6f0-3941-426b-8ae6-bdb830f42c91" />
+
 
 
 ### Key Innovations
