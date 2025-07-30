@@ -289,9 +289,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-**Principal Investigator:** Dr. Lu  
-**Research Lead:** Khairul Islam - [email@msu.edu]  
-**Co-Researcher:** Boyang Deng - [email@msu.edu]  
 
 **Institution:** Michigan State University  
 **Department:** [Department Name]  
