@@ -1,0 +1,124 @@
+// Hall Effect Sensor Test Code
+// Pin 3 connected to Hall sensor output
+
+const int hallPin = 3;        // Hall sensor connected to digital pin 3
+const int ledPin = 13;        // Built-in LED on pin 13
+
+int hallState = 0;            // Current state of hall sensor
+int lastHallState = 0;        // Previous state of hall sensor
+int triggerCount = 0;         // Count how many times sensor triggered
+
+unsigned long lastTriggerTime = 0;  // Time of last trigger
+unsigned long currentTime = 0;      // Current time
+bool sensorActive = false;          // Track if sensor is currently active
+
+void setup() {
+  // Initialize serial communication
+  Serial.begin(9600);
+  
+  // Set pin modes
+  pinMode(hallPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  
+  // Initial readings
+  lastHallState = digitalRead(hallPin);
+  
+  // Welcome message
+  Serial.println("=================================");
+  Serial.println("    HALL EFFECT SENSOR MONITOR   ");
+  Serial.println("=================================");
+  Serial.println("Sensor connected to Digital Pin 3");
+  Serial.println("Bring a magnet close to test...");
+  Serial.println();
+  
+  // Show initial state
+  Serial.print("Initial sensor state: ");
+  Serial.println(lastHallState ? "HIGH (Triggered)" : "LOW (Not triggered)");
+  Serial.println("---------------------------------");
+  Serial.println();
+}
+
+void loop() {
+  // Read current sensor state
+  hallState = digitalRead(hallPin);
+  currentTime = millis();
+  
+  // Check if state changed
+  if (hallState != lastHallState) {
+    
+    if (hallState == HIGH) {
+      // Sensor just got triggered
+      triggerCount++;
+      lastTriggerTime = currentTime;
+      sensorActive = true;
+      
+      // Turn on LED
+      digitalWrite(ledPin, HIGH);
+      
+      // Print trigger information
+      Serial.println("🧲 MAGNET DETECTED! 🧲");
+      Serial.print("   ➤ Trigger #");
+      Serial.println(triggerCount);
+      Serial.print("   ➤ Time: ");
+      Serial.print(currentTime);
+      Serial.println(" ms");
+      Serial.print("   ➤ Sensor State: HIGH");
+      Serial.println();
+      
+    } else {
+      // Sensor just got released
+      sensorActive = false;
+      
+      // Turn off LED
+      digitalWrite(ledPin, LOW);
+      
+      // Calculate how long it was triggered
+      unsigned long triggerDuration = currentTime - lastTriggerTime;
+      
+      Serial.println("❌ MAGNET REMOVED ❌");
+      Serial.print("   ➤ Sensor State: LOW");
+      Serial.println();
+      Serial.print("   ➤ Was active for: ");
+      Serial.print(triggerDuration);
+      Serial.println(" ms");
+      Serial.println("---------------------------------");
+      Serial.println();
+    }
+    
+    // Update last state
+    lastHallState = hallState;
+  }
+  
+  // Print periodic status every 10 seconds when not active
+  static unsigned long lastStatusTime = 0;
+  if (!sensorActive && (currentTime - lastStatusTime >= 10000)) {
+    lastStatusTime = currentTime;
+    Serial.print("⏰ Status Check - Sensor: ");
+    Serial.print(hallState ? "ACTIVE" : "Waiting...");
+    Serial.print(" | Total Triggers: ");
+    Serial.print(triggerCount);
+    Serial.print(" | Uptime: ");
+    Serial.print(currentTime / 1000);
+    Serial.println(" seconds");
+  }
+  
+  // Real-time monitoring (uncomment next section for continuous readings)
+  /*
+  static unsigned long lastRealtimeUpdate = 0;
+  if (currentTime - lastRealtimeUpdate >= 500) {  // Update every 500ms
+    lastRealtimeUpdate = currentTime;
+    Serial.print("Real-time: ");
+    Serial.print(hallState ? "HIGH" : "LOW ");
+    Serial.print(" | Count: ");
+    Serial.println(triggerCount);
+  }
+  */
+  
+  delay(50);  // Small delay for debouncing
+}
+
+// Optional: Function to reset counter (call from main loop if needed)
+void resetCounter() {
+  triggerCount = 0;
+  Serial.println("🔄 Trigger counter reset!");
+}
