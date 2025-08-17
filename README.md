@@ -291,8 +291,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 
 **Institution:** Michigan State University  
-**Department:** [Department Name]  
-**Laboratory:** [Lab Name]
 
 ---
 
@@ -305,3 +303,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ⭐ **Star this repository** if you find it useful for your research!
 
 **Keywords:** Precision Agriculture, Autonomous Systems, Computer Vision, AI, Robotics, Weed Management, RTK-GPS, Economic Optimization, Sustainable Farming
+
