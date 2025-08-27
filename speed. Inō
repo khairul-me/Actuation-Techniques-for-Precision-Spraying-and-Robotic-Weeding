@@ -5,8 +5,8 @@ const int hallPin = 3;
 const int ledPin = 13;
 
 // Wheel specifications
-const float wheelDiameter = 39.06;  // mm
-const float distancePerRotation = 3.14159 * wheelDiameter;  // mm per rotation (122.71 mm)
+const float wheelDiameter = 45.49;  // mm
+const float distancePerRotation = 3.14159 * wheelDiameter;  // mm per rotation (≈142.91 mm)
 
 int hallState = 0;
 int lastHallState = 0;
